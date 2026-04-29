@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 3 — Land Your First Clients</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Anybody:ital,wght@0,800;0,900;1,700&family=Courier+Prime:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #141416;
+    --surface2: #1a1a1d;
+    --border: #252528;
+    --border2: #2e2e32;
+    --text: #e4e4e8;
+    --muted: #6e6e78;
+    --faint: #1e1e22;
+    --accent: #ff5c35;
+    --accent-bg: #1a0f0a;
+    --green: #35d68a;
+    --green-bg: #091a10;
+    --blue: #5cb8ff;
+    --blue-bg: #0a1220;
+    --yellow: #f5c842;
+    --yellow-bg: #1a1500;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 80px 64px 60px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 70% 50%, #1a0f0a 0%, var(--bg) 60%);
+  }
+
+  .phase-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .phase-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  .phase-tag {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Courier Prime', monospace;
+  }
+
+  header h1 {
+    font-family: 'Anybody', sans-serif;
+    font-size: clamp(46px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--text);
+    max-width: 700px;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  header h1 em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    font-weight: 300;
+    margin-bottom: 48px;
+    line-height: 1.75;
+  }
+
+  .stat-bar {
+    display: flex;
+    gap: 0;
+    background: var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .stat-bar-item {
+    padding: 16px 24px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .stat-bar-item:last-child { border-right: none; }
+
+  .sbi-num {
+    font-family: 'Anybody', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .sbi-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Courier Prime', monospace;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 72px 64px 100px;
+  }
+
+  .section { margin-bottom: 88px; }
+
+  .eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: 'Anybody', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 36px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── TARGET TABLE ── */
+  .target-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .target-card {
+    background: var(--surface);
+    padding: 24px;
+  }
+
+  .target-card .biz-type {
+    font-family: 'Anybody', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .target-card .why-tag {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .target-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .target-card .avg-price {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    color: var(--yellow);
+    background: var(--yellow-bg);
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+
+  .callout.orange { background: var(--accent-bg); border: 1px solid #3a1a0d; }
+  .callout.green { background: var(--green-bg); border: 1px solid #0d3a1a; }
+  .callout.blue { background: var(--blue-bg); border: 1px solid #0d2030; }
+  .callout.yellow { background: var(--yellow-bg); border: 1px solid #3a3000; }
+
+  .cl-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .callout.orange .cl-label { color: var(--accent); }
+  .callout.green .cl-label { color: var(--green); }
+  .callout.blue .cl-label { color: var(--blue); }
+  .callout.yellow .cl-label { color: var(--yellow); }
+
+  .callout p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── SCRIPT BOX ── */
+  .script-wrap {
+    background: var(--faint);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+
+  .script-header {
+    background: var(--surface2);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .script-header .sh-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border2);
+  }
+
+  .script-header .sh-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .script-body {
+    padding: 24px 28px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #c8c0b8;
+    white-space: pre-wrap;
+  }
+
+  .script-body .highlight {
+    color: var(--yellow);
+  }
+
+  .script-body .bracket {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .script-note {
+    padding: 12px 20px;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── CHANNEL BREAKDOWN ── */
+  .channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .channel-item {
+    background: var(--surface);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .ch-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .ch-type {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .channel-item p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .ch-effort {
+    flex-shrink: 0;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+
+  .effort-pill {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .effort-pill.high { background: var(--green-bg); color: var(--green); }
+  .effort-pill.med { background: var(--blue-bg); color: var(--blue); }
+  .effort-pill.low { background: var(--yellow-bg); color: var(--yellow); }
+
+  .ch-target {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── OBJECTION HANDLER ── */
+  .objection-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .obj-card {
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .obj-q {
+    padding: 16px 22px;
+    background: var(--surface2);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .obj-q-icon {
+    color: var(--accent);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .obj-q p {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .obj-a {
+    padding: 16px 22px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .obj-a-icon {
+    color: var(--green);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .obj-a p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .obj-a p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── WEEKLY TRACKER ── */
+  .weekly-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .weekly-table th {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 12px 20px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .weekly-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--faint);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .weekly-table tr:last-child td { border-bottom: none; }
+
+  .weekly-table td:first-child {
+    font-weight: 600;
+    color: var(--accent);
+    width: 140px;
+    font-family: 'Courier Prime', monospace;
+  }
+
+  .weekly-table td:nth-child(2) {
+    color: var(--text);
+    font-weight: 500;
+    width: 200px;
+  }
+
+  .weekly-table td:nth-child(3) {
+    color: var(--muted);
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-weight: 300;
+  }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 64px 0;
+  }
+
+  footer {
+    background: var(--surface);
+    color: var(--muted);
+    padding: 32px 64px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer span { color: var(--accent); }
+
+  @media (max-width: 680px) {
+    header, main { padding-left: 20px; padding-right: 20px; }
+    .target-grid { grid-template-columns: 1fr; }
+    .channel-item { grid-template-columns: 1fr; }
+    .stat-bar { flex-direction: column; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="phase-row">
+    <div class="phase-dot"></div>
+    <div class="phase-tag">Phase 03 of 04 · Month 1–2 · Outreach</div>
+  </div>
+  <h1>Land Your<br><em>First</em> Clients</h1>
+  <p class="header-sub">This is where most people stall — not because they can't do the work, but because they won't do the talking. The scripts, systems, and strategies in this phase are everything you need to go from zero to paid.</p>
+  <div class="stat-bar">
+    <div class="stat-bar-item">
+      <span class="sbi-num">10</span>
+      <span class="sbi-label">Contacts/week minimum</span>
+    </div>
+    <div class="stat-bar-item">
+      <span class="sbi-num">1/10</span>
+      <span class="sbi-label">Realistic close rate</span>
+    </div>
+    <div class="stat-bar-item">
+      <span class="sbi-num">$0</span>
+      <span class="sbi-label">Ad spend needed</span>
+    </div>
+    <div class="stat-bar-item">
+      <span class="sbi-num">Age 15</span>
+      <span class="sbi-label">Is your advantage</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- WHO TO TARGET -->
+  <div class="section">
+    <div class="eyebrow">Step 1 of 5 — Targeting</div>
+    <h2>Who to Target First</h2>
+    <p class="sub">Not every business is worth approaching. These six types have the highest need, lowest bar to close, and will pay reasonable prices without needing an extensive pitch.</p>
+
+    <div class="target-grid">
+      <div class="target-card">
+        <div class="biz-type">Barbershops & Salons</div>
+        <div class="why-tag">⚡ High need, fast decisions</div>
+        <p>Often run by a single owner who makes decisions instantly. Booking systems, galleries, and service menus = clear value. Many still have no site or a terrible Facebook page as their "site."</p>
+        <span class="avg-price">avg: $600–900</span>
+      </div>
+      <div class="target-card">
+        <div class="biz-type">Restaurants & Cafés</div>
+        <div class="why-tag">⚡ Menu + hours = immediate value</div>
+        <p>Every restaurant gets asked "do you have a menu online?" If the answer is no, they're losing customers daily. Owners understand the ROI immediately when you frame it this way.</p>
+        <span class="avg-price">avg: $700–1,000</span>
+      </div>
+      <div class="target-card">
+        <div class="biz-type">Contractors & Trades</div>
+        <div class="why-tag">⭐ High value, less competition</div>
+        <p>Plumbers, electricians, painters, landscapers. These guys get jobs worth $500–5,000 — a $1,000 website that gets them even one extra job pays for itself. They're motivated by ROI.</p>
+        <span class="avg-price">avg: $800–1,200</span>
+      </div>
+      <div class="target-card">
+        <div class="biz-type">Auto Shops & Detailers</div>
+        <div class="why-tag">✓ Easy to pitch before/after</div>
+        <p>Before/after car photos are incredibly shareable. Easy to show a gallery. Owners tend to be practical and respond well to "here's what it would look like" mockups.</p>
+        <span class="avg-price">avg: $500–800</span>
+      </div>
+      <div class="target-card">
+        <div class="biz-type">Personal Trainers & Gyms</div>
+        <div class="why-tag">⚡ Booking + testimonials = perfect</div>
+        <p>Trainers need bookings, testimonials, and a professional presence. Many market themselves on Instagram but have no website to link. Easy upsell on scheduling integrations.</p>
+        <span class="avg-price">avg: $500–900</span>
+      </div>
+      <div class="target-card">
+        <div class="biz-type">Cleaning & Home Services</div>
+        <div class="why-tag">✓ Easy referral loop</div>
+        <p>Home cleaners, dog walkers, lawn care. These businesses run on local referrals. A professional site with reviews and a quote form can double their inbound leads. They often have steady recurring revenue and will pay consistently for a retainer.</p>
+        <span class="avg-price">avg: $450–750</span>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="cl-label">✓ How to find them without walking in</div>
+      <p>Google Maps is your lead list. Search "[business type] [your city]" — filter for businesses with no website listed or ones linked to a basic Facebook page. Those are your leads. Write down 20 per session. This takes 30 minutes and gives you a week's worth of outreach targets.</p>
+    </div>
+  </div>
+
+  <!-- OUTREACH CHANNELS -->
+  <div class="section">
+    <div class="eyebrow">Step 2 of 5 — Channels</div>
+    <h2>Your 4 Outreach Channels</h2>
+    <p class="sub">Use all four. Each reaches a different kind of client. Rank them by effort and use accordingly.</p>
+
+    <div class="channel-list">
+      <div class="channel-item">
+        <div>
+          <div class="ch-type">Channel 01</div>
+          <div class="ch-name">Walk-In (In Person)</div>
+        </div>
+        <p>The highest-converting channel by far. Walk into local businesses during off-peak hours (weekday afternoons). Show your portfolio on your phone. Ask to speak with the owner. Your age makes you memorable — owners rarely turn away a motivated teenager with a professional portfolio.</p>
+        <div class="ch-effort">
+          <span class="effort-pill high">Highest ROI</span>
+          <span class="ch-target">5 walk-ins/week</span>
+        </div>
+      </div>
+      <div class="channel-item">
+        <div>
+          <div class="ch-type">Channel 02</div>
+          <div class="ch-name">Warm Network (People You Know)</div>
+        </div>
+        <p>Tell every adult you know: parents, relatives, neighbors, coaches, teachers. The message: "I'm building websites for local businesses — do you know anyone who needs one?" You need one introduction, not a sale. Warm referrals close 5x faster than cold outreach.</p>
+        <div class="ch-effort">
+          <span class="effort-pill high">Easiest closes</span>
+          <span class="ch-target">Tell 20 people total</span>
+        </div>
+      </div>
+      <div class="channel-item">
+        <div>
+          <div class="ch-type">Channel 03</div>
+          <div class="ch-name">Cold Email</div>
+        </div>
+        <p>Find business emails on Google Maps or their existing (bad) website. Send a short, 4-sentence email with one specific observation about their business and a mockup screenshot. Volume is key — expect 5–10% reply rate. Never send a wall of text. The script below is your template.</p>
+        <div class="ch-effort">
+          <span class="effort-pill med">Medium effort</span>
+          <span class="ch-target">10 emails/week</span>
+        </div>
+      </div>
+      <div class="channel-item">
+        <div>
+          <div class="ch-type">Channel 04</div>
+          <div class="ch-name">Social Media / Community Posts</div>
+        </div>
+        <p>Post in local Facebook groups, Nextdoor, and community Subreddits. Frame it honestly: "I'm a 15-year-old building websites for local businesses. First client this month gets 20% off." These posts regularly go mini-viral locally because the "15 years old" angle is compelling. Post once a week, different groups.</p>
+        <div class="ch-effort">
+          <span class="effort-pill low">Passive leads</span>
+          <span class="ch-target">1 post/week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <div class="section">
+    <div class="eyebrow">Step 3 of 5 — Scripts</div>
+    <h2>Word-for-Word Scripts</h2>
+    <p class="sub">Memorize these. Adapt to your voice. Practice out loud before using them.</p>
+
+    <div class="script-wrap">
+      <div class="script-header">
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <span class="sh-label">WALK-IN SCRIPT — Say this at the door</span>
+      </div>
+      <div class="script-body">"<span class="highlight">Hi, is the owner around?</span>"
+
+[when owner appears]
+
+"Hi, my name's <span class="bracket">[Your Name]</span> — I'm a local student and I design websites for small businesses. I was nearby and noticed you don't have a website yet, or it looks like it might be due for an update.
+
+I actually put together a quick concept of what yours could look like — <span class="highlight">would you have 2 minutes to take a look?</span>
+
+I've already built a few sites for businesses in the area and I'd love to help you get found online."
+
+[show your phone portfolio]
+
+"<span class="highlight">I'm 15, so my rates are very reasonable</span> compared to agencies — and I'm available locally. Would you want to chat more about what you're looking for?"</div>
+      <div class="script-note">💡 If they say "I'm busy" → "Of course — could I leave my card and you take a look when you have 2 minutes?" Then hand your phone number on a notecard.</div>
+    </div>
+
+    <div class="script-wrap">
+      <div class="script-header">
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <span class="sh-label">COLD EMAIL SCRIPT — 4 sentences max</span>
+      </div>
+      <div class="script-body">Subject: <span class="highlight">Quick website idea for <span class="bracket">[Business Name]</span></span>
+
+Hi <span class="bracket">[Owner Name or "there"]</span>,
+
+I noticed <span class="bracket">[Business Name]</span> doesn't have a website yet — I Googled you and couldn't find one, which means you're probably missing customers who search online.
+
+I'm a local web designer (I'm 15, so my prices are much lower than an agency) and I built a quick concept of what your site could look like — <span class="highlight">I'd love to show you</span>.
+
+I've attached a screenshot. Would you be open to a quick 10-minute call this week?
+
+<span class="bracket">[Your Name]</span> | <span class="bracket">[yourname.com]</span> | <span class="bracket">[phone/email]</span></div>
+      <div class="script-note">💡 Attach a screenshot of your most relevant portfolio piece (same industry). Subject line with their business name dramatically improves open rates.</div>
+    </div>
+
+    <div class="script-wrap">
+      <div class="script-header">
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <span class="sh-label">WARM REFERRAL ASK — Text or say in person</span>
+      </div>
+      <div class="script-body">Text to a family friend or adult you know:
+
+"Hey <span class="bracket">[Name]</span> — random question: do you know anyone who owns a small business that doesn't have a website, or has a really outdated one?
+
+<span class="highlight">I've started building websites for local businesses</span> and I'm looking for my next client. Even a quick intro would help a ton."
+
+---
+
+Or at a family event / conversation:
+
+"I've started a little side business making websites for local businesses. Honestly the hardest part is just finding people who need them — <span class="highlight">if you ever hear of anyone, I'd love an intro."</span></div>
+      <div class="script-note">💡 Don't ask them to "buy" anything — just an introduction. This removes all pressure and makes people far more likely to help.</div>
+    </div>
+
+    <div class="script-wrap">
+      <div class="script-header">
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <div class="sh-dot"></div>
+        <span class="sh-label">FACEBOOK / NEXTDOOR POST</span>
+      </div>
+      <div class="script-body">📣 <span class="highlight">Local business owners — I build websites</span>
+
+Hi <span class="bracket">[Town Name]</span>! I'm a 15-year-old high school student who builds professional websites for local businesses. I've been doing this for a few months and I'd love to help more businesses in our community get found online.
+
+My work: <span class="bracket">[yourname.com]</span>
+
+I offer:
+→ Starter sites from $400
+→ Full 5-page sites from $800
+→ Monthly maintenance for $150/mo
+
+<span class="highlight">First new client this month gets 20% off.</span>
+
+Feel free to DM me or comment below — happy to give a free quote!</div>
+      <div class="script-note">💡 Post this in 3–4 local Facebook groups or Nextdoor neighborhoods. Rotate groups weekly so you're not spamming the same feed.</div>
+    </div>
+  </div>
+
+  <!-- OBJECTION HANDLING -->
+  <div class="section">
+    <div class="eyebrow">Step 4 of 5 — Objections</div>
+    <h2>Handle Every Objection</h2>
+    <p class="sub">These are the exact responses you'll hear. Know them before you walk in the door.</p>
+
+    <div class="objection-stack">
+      <div class="obj-card">
+        <div class="obj-q">
+          <div class="obj-q-icon">❓</div>
+          <p>"You're only 15 — can you actually handle this?"</p>
+        </div>
+        <div class="obj-a">
+          <div class="obj-a-icon">✓</div>
+          <p><strong>"That's fair — my work speaks for itself."</strong> [Pull up your phone portfolio] "I've already built [X] sites — these are all live. I think you'll find the quality is what matters, not my age. Most of my clients are actually happy I'm younger because I'm more up to date on what works online right now."</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">
+          <div class="obj-q-icon">❓</div>
+          <p>"We already have a website."</p>
+        </div>
+        <div class="obj-a">
+          <div class="obj-a-icon">✓</div>
+          <p>"That's great — <strong>do you mind if I take a quick look?</strong>" [Look it up on your phone] If it's old/basic: "I think there's a real opportunity to modernize this — mobile usage is huge and this one might not be converting as well as it could. Would you be open to a free audit of what could be improved?"</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">
+          <div class="obj-q-icon">❓</div>
+          <p>"I can't afford it right now."</p>
+        </div>
+        <div class="obj-a">
+          <div class="obj-a-icon">✓</div>
+          <p>"Totally understand. <strong>What if we started small</strong> — a simple 2-page site that gets you online and looking professional? I can do that for $[lower price]. And if you ever want to expand it, we can do that down the road. The important thing is getting you found online."</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">
+          <div class="obj-q-icon">❓</div>
+          <p>"I need to think about it / ask my partner."</p>
+        </div>
+        <div class="obj-a">
+          <div class="obj-a-icon">✓</div>
+          <p>"Of course — take your time. <strong>Would it help if I sent you a written quote</strong> with exactly what's included? That way you have something concrete to look at together. What's the best email to send it to?" [Get their email. Follow up in 3 days with a short note + quote.]</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-q">
+          <div class="obj-q-icon">❓</div>
+          <p>"My nephew/friend can do it for free."</p>
+        </div>
+        <div class="obj-a">
+          <div class="obj-a-icon">✓</div>
+          <p>"That's great if it works out! The difference is <strong>I do this professionally and on a timeline</strong> — you get a proper contract, a set delivery date, and ongoing support. Free often means 'whenever they get around to it' and no accountability. But if they come through, that's totally fine — I just wanted to make sure you knew your options."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY ROUTINE -->
+  <div class="section">
+    <div class="eyebrow">Step 5 of 5 — Consistency</div>
+    <h2>Your Weekly Outreach Routine</h2>
+    <p class="sub">This takes 5–7 hours per week on top of any active project work. The key is doing it every week — not in bursts.</p>
+
+    <table class="weekly-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Action</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td>Research 15 leads</td>
+          <td>Search Google Maps for [business type] in your area. Note name, address, email, and whether they have a site. Build this list weekly in a Notion or Google Sheet.</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td>Send 10 cold emails</td>
+          <td>Use the script. Personalize the first line for each business (mention their specific gap). Attach a relevant portfolio screenshot. Send from a professional email — yourname@yourname.com via Google Workspace or just Gmail.</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>3–4 walk-ins</td>
+          <td>Go after school or on a free period. Hit businesses in the same neighborhood to save time. Wear something presentable. Bring a small card with your name and website URL.</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td>Follow up + post</td>
+          <td>Follow up on any emails from Tuesday with no reply ("Just wanted to make sure this didn't get lost!"). Post your weekly social media blurb in 2–3 local Facebook groups or Nextdoor.</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td>Warm network check-in</td>
+          <td>Text or ask 2–3 people in your network: "Anyone you know needing a website?" Also follow up on any outstanding quotes or conversations from the week.</td>
+        </tr>
+        <tr>
+          <td>Weekend</td>
+          <td>Review + project work</td>
+          <td>Count your contacts this week (aim for 15+ total touchpoints). Work on any active client projects. Update your portfolio with anything new. Rest — you're doing great.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout orange" style="margin-top:24px;">
+      <div class="cl-label">🔥 The most important mindset</div>
+      <p>You will hear "no" or get no response from 9 out of 10 people. That's completely normal and has nothing to do with your quality. A plumber reaches 100 houses before getting 10 jobs. Treat outreach like a math equation: more inputs = more outputs. The goal each week is contacts, not closes.</p>
+    </div>
+
+    <div class="callout yellow">
+      <div class="cl-label">📊 Track everything in a simple spreadsheet</div>
+      <p>Keep one Google Sheet with columns: Business Name | Contact Method | Date | Follow-up Date | Status (Contacted / Replied / Meeting / Closed / Dead). Review it every Friday. A managed pipeline is the difference between freelancers who get stuck and ones who grow consistently.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">Phase 3 Complete When...</div>
+    <h2>Your Phase 3 Completion Checklist</h2>
+    <ul class="checklist" style="margin-top:24px;">
+      <li><div class="check-box"></div> I have a lead tracker spreadsheet with at least 20 businesses listed</li>
+      <li><div class="check-box"></div> I have sent at least 10 cold emails using the script above</li>
+      <li><div class="check-box"></div> I have walked into at least 5 businesses in person</li>
+      <li><div class="check-box"></div> I have told at least 10 adults in my network what I do and asked for referrals</li>
+      <li><div class="check-box"></div> I have posted in at least 2 local online community groups</li>
+      <li><div class="check-box"></div> I have landed at least 1 paid client (even at a lower intro price)</li>
+      <li><div class="check-box"></div> I have practiced the objection responses out loud at least once</li>
+      <li><div class="check-box"></div> I am sending at least 15 total outreach touchpoints every week</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <span>Phase 03 — Land Your First Clients</span>
+  <span>Next: Phase 04 — Scale Without Burning Out →</span>
+</footer>
+
+</body>
+</html>

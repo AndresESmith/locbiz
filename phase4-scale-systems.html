@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 4 — Scale & Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,400&family=Epilogue:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --surface: #fdfbf7;
+    --ink: #18160e;
+    --mid: #6b6555;
+    --faint: #eceadf;
+    --rule: #dbd8ca;
+    --accent: #2d5a27;
+    --accent-bg: #edf5ec;
+    --accent-rule: #b8d4b5;
+    --orange: #c44b0a;
+    --orange-bg: #fdf0e8;
+    --blue: #1a3a6b;
+    --blue-bg: #eaeff8;
+    --gold: #9a6c00;
+    --gold-bg: #fdf5d8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Epilogue', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 80px 64px 64px;
+    background: var(--ink);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 80% 20%, #2d5a2730 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, #9a6c0015 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .phase-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7a9a76;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .phase-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: #7a9a76;
+  }
+
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 7vw, 90px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: white;
+    max-width: 680px;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  header h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: #a8d4a4;
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 520px;
+    font-weight: 300;
+    margin-bottom: 52px;
+    line-height: 1.75;
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .hg-cell {
+    padding: 20px 22px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .hg-num {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #a8d4a4;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hg-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 64px 100px;
+  }
+
+  .section { margin-bottom: 88px; }
+
+  .eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .sub {
+    font-size: 14px;
+    color: var(--mid);
+    max-width: 580px;
+    margin-bottom: 36px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ── SYSTEM CARDS ── */
+  .system-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .sys-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px;
+  }
+
+  .sys-num {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--faint);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .sys-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .sys-card p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .sys-tool {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-rule);
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+
+  .callout.green { background: var(--accent-bg); border: 1px solid var(--accent-rule); }
+  .callout.orange { background: var(--orange-bg); border: 1px solid #e8c4a8; }
+  .callout.blue { background: var(--blue-bg); border: 1px solid #b8c8e4; }
+  .callout.gold { background: var(--gold-bg); border: 1px solid #e8d4a0; }
+
+  .cl-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .callout.green .cl-label { color: var(--accent); }
+  .callout.orange .cl-label { color: var(--orange); }
+  .callout.blue .cl-label { color: var(--blue); }
+  .callout.gold .cl-label { color: var(--gold); }
+
+  .callout p {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .callout ul {
+    list-style: none;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .callout ul li {
+    font-size: 13px;
+    color: var(--mid);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .callout ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+  }
+
+  .callout.green ul li::before { color: var(--accent); }
+  .callout.orange ul li::before { color: var(--orange); }
+  .callout.blue ul li::before { color: var(--blue); }
+
+  /* ── UPSELL TABLE ── */
+  .upsell-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .upsell-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-align: left;
+    padding: 12px 22px;
+    background: var(--faint);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .upsell-table td {
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--faint);
+    color: var(--ink);
+    vertical-align: top;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .upsell-table tr:last-child td { border-bottom: none; }
+
+  .upsell-table td:first-child { font-weight: 600; color: var(--ink); width: 28%; }
+
+  .upsell-table td:nth-child(2) {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent);
+    font-size: 14px;
+    width: 18%;
+    font-weight: 600;
+  }
+
+  .upsell-table td:nth-child(3) { color: var(--mid); }
+
+  .upsell-table td .tool-note {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+    background: var(--blue-bg);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  /* ── PRICING RAISE TIMELINE ── */
+  .price-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 48px;
+  }
+
+  .price-timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    bottom: 20px;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .pt-item {
+    position: relative;
+    padding-bottom: 32px;
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+  }
+
+  .pt-item:last-child { padding-bottom: 0; }
+
+  .pt-marker {
+    position: absolute;
+    left: -33px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--rule);
+    z-index: 1;
+  }
+
+  .pt-marker.done {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .pt-body {}
+
+  .pt-milestone {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+
+  .pt-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .pt-price {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .pt-tier {
+    font-size: 13px;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  .pt-body p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 300;
+    max-width: 480px;
+  }
+
+  /* ── REFERRAL ENGINE ── */
+  .referral-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .rf-step {
+    background: var(--surface);
+    padding: 24px 20px;
+    position: relative;
+  }
+
+  .rf-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--mid);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .rf-step .rf-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .rf-step h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .rf-step p {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* ── INCOME PROJECTION ── */
+  .income-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .income-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-align: left;
+    padding: 12px 22px;
+    background: var(--faint);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .income-table td {
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .income-table tr:last-child td { border-bottom: none; }
+
+  .income-table td:first-child { font-weight: 600; color: var(--accent); width: 120px; font-family: 'Share Tech Mono', monospace; font-size: 12px; }
+
+  .income-table td:nth-child(3) {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+
+  .income-table tr.total-row td {
+    background: var(--ink);
+    color: white;
+    border-bottom: none;
+  }
+
+  .income-table tr.total-row td:first-child { color: #a8d4a4; }
+  .income-table tr.total-row td:nth-child(3) { color: #a8d4a4; }
+
+  /* ── SOCIAL CONTENT PLAN ── */
+  .content-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .cc-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cc-header {
+    background: var(--faint);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cc-platform {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .cc-freq {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .cc-body {
+    padding: 16px 18px;
+  }
+
+  .cc-body h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .cc-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .cc-body ul li {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .cc-body ul li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    font-weight: 300;
+  }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 64px 0;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-block {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 56px;
+  }
+
+  .final-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, #2d5a2720 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .final-block h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .final-block h2 em {
+    font-style: italic;
+    font-weight: 300;
+    color: #a8d4a4;
+  }
+
+  .final-block p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .final-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .final-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .final-stat .fs-num {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #a8d4a4;
+    line-height: 1;
+  }
+
+  .final-stat .fs-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  footer {
+    background: var(--faint);
+    color: var(--mid);
+    padding: 32px 64px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid var(--rule);
+  }
+
+  footer span { color: var(--accent); }
+
+  @media (max-width: 680px) {
+    header, main { padding-left: 20px; padding-right: 20px; }
+    .header-grid { grid-template-columns: 1fr 1fr; }
+    .system-grid { grid-template-columns: 1fr; }
+    .referral-flow { grid-template-columns: 1fr 1fr; }
+    .content-cards { grid-template-columns: 1fr; }
+    .final-stats { gap: 24px; }
+    .final-block { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="phase-label">Phase 04 of 04 · Month 2–6 · Growth</div>
+  <h1>Scale Without<br><em>Burning</em> Out</h1>
+  <p class="header-sub">You've landed clients. Now the work is to build systems that grow your income without growing your stress. This phase turns a hustle into a business you can run for years.</p>
+  <div class="header-grid">
+    <div class="hg-cell">
+      <div class="hg-num">$4K+</div>
+      <div class="hg-label">Month 6 target</div>
+    </div>
+    <div class="hg-cell">
+      <div class="hg-num">10 hrs</div>
+      <div class="hg-label">Target work/week</div>
+    </div>
+    <div class="hg-cell">
+      <div class="hg-num">50%</div>
+      <div class="hg-label">Recurring income</div>
+    </div>
+    <div class="hg-cell">
+      <div class="hg-num">Never</div>
+      <div class="hg-label">Stop outreach</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SYSTEMS -->
+  <div class="section">
+    <div class="eyebrow">Step 1 of 5 — Systems</div>
+    <h2>Build Systems, Not Just Work</h2>
+    <p class="sub">The difference between a freelancer who burns out and one who scales is systems. These four tools take under 2 hours to set up and save you hours every week.</p>
+
+    <div class="system-grid">
+      <div class="sys-card">
+        <div class="sys-num">01</div>
+        <h3>Client Pipeline Tracker</h3>
+        <p>A simple spreadsheet or Notion board tracking every lead and client: Lead → Contacted → Proposal Sent → Closed → In Progress → Delivered → Retainer. Review every Friday. You should always know where every client conversation stands.</p>
+        <span class="sys-tool">Tool: Notion (free)</span>
+      </div>
+      <div class="sys-card">
+        <div class="sys-num">02</div>
+        <h3>Project Template Kit</h3>
+        <p>Create a reusable Webflow/Framer template for each business type (salon, restaurant, contractor). Each new project starts from a template — saves 4–6 hours per build. Over 10 projects, this saves you 50+ hours.</p>
+        <span class="sys-tool">Tool: Webflow / Framer</span>
+      </div>
+      <div class="sys-card">
+        <div class="sys-num">03</div>
+        <h3>Onboarding Questionnaire</h3>
+        <p>Before starting any project, send clients a Google Form asking: business name, services, target customer, color preferences, competitors, any text/photos they have. This replaces 3–4 back-and-forth emails and gets you the content you need upfront.</p>
+        <span class="sys-tool">Tool: Google Forms (free)</span>
+      </div>
+      <div class="sys-card">
+        <div class="sys-num">04</div>
+        <h3>Automated Invoicing</h3>
+        <p>Set up Wave to auto-send invoices and payment reminders. When a project is complete, you trigger the invoice — Wave handles follow-up reminders automatically so you don't have to awkwardly chase payments.</p>
+        <span class="sys-tool">Tool: Wave (free)</span>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="cl-label">✓ The onboarding questionnaire saves the most time</div>
+      <p>The biggest time sink in web projects isn't building — it's waiting for clients to send you their logo, their text, their photos. A mandatory upfront form with a clear deadline ("please complete this within 5 days of signing") eliminates the most common project delay.</p>
+    </div>
+  </div>
+
+  <!-- UPSELLS -->
+  <div class="section">
+    <div class="eyebrow">Step 2 of 5 — Upsells</div>
+    <h2>Upsell Services to Every Client</h2>
+    <p class="sub">After delivering a site, most clients are happy and receptive to add-ons. These are easy to deliver and significantly increase your revenue per client.</p>
+
+    <table class="upsell-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Price</th>
+          <th>How to deliver it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Google Business Profile Setup</td>
+          <td>$150</td>
+          <td>Create or claim their Google Business listing, add photos, hours, services, and a link to the new website. Takes ~45 minutes. Every local business needs this — it's how they show up on Google Maps.</td>
+        </tr>
+        <tr>
+          <td>Logo Design</td>
+          <td>$100–200</td>
+          <td>Use Looka ($20 AI tool) or Canva to create a clean logo. Present 3 options. Charge $100–200 and pocket the difference. Most small businesses have no logo or a terrible one.
+            <span class="tool-note">Tool: Looka, Canva</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Monthly SEO Report</td>
+          <td>$100/mo</td>
+          <td>Set up Google Search Console (free) for their site. Every month, screenshot their rankings and traffic. Write 3 bullet points of what improved. Send in an email. Takes 15 minutes — charges $100.
+            <span class="tool-note">Tool: Google Search Console (free)</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Social Media Graphics Pack</td>
+          <td>$100–150</td>
+          <td>Design 10 branded social media post templates in Canva. Client can reuse them forever. Pair with their existing branding and site colors. Easy and quick — most business owners desperately want consistent-looking posts.
+            <span class="tool-note">Tool: Canva (free)</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Email Newsletter Setup</td>
+          <td>$200 one-time</td>
+          <td>Set up Mailchimp (free) for the client. Create a signup form, add it to their site, and design one email template. Show them how to send one. Takes ~2 hours total. Huge perceived value.
+            <span class="tool-note">Tool: Mailchimp (free)</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Annual Site Refresh</td>
+          <td>$200–400</td>
+          <td>After 12 months, offer to update photos, copy, and design details. Most businesses have changed and their site is already outdated. Easy recurring revenue from existing clients.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout gold">
+      <div class="cl-label">💬 How to pitch upsells naturally</div>
+      <p>Pitch right after delivery, when they're most excited: "Your site is live and looking great. One thing I noticed is you don't have a Google Business Profile set up yet — that's how you show up on Google Maps. I can handle that for $150, usually done within a day. Want me to take care of it?"</p>
+    </div>
+  </div>
+
+  <!-- RAISE PRICES -->
+  <div class="section">
+    <div class="eyebrow">Step 3 of 5 — Pricing Growth</div>
+    <h2>Raise Your Prices Consistently</h2>
+    <p class="sub">Your prices should increase every few clients. Here's the timeline to follow. The confidence to charge more comes from more deliveries — not from waiting until you "feel ready."</p>
+
+    <div class="price-timeline">
+      <div class="pt-item">
+        <div class="pt-marker done"></div>
+        <div class="pt-body">
+          <div class="pt-milestone">Client 1 (the free/cheap one)</div>
+          <div class="pt-price-row">
+            <span class="pt-price">Free–$200</span>
+            <span class="pt-tier">Portfolio builder</span>
+          </div>
+          <p>This is a learning experience, not a payday. Do excellent work, collect a testimonial, and use it to justify real prices.</p>
+        </div>
+      </div>
+      <div class="pt-item">
+        <div class="pt-marker done"></div>
+        <div class="pt-body">
+          <div class="pt-milestone">Clients 2–3</div>
+          <div class="pt-price-row">
+            <span class="pt-price">$400–500</span>
+            <span class="pt-tier">Starter rate</span>
+          </div>
+          <p>Introductory pricing. You're getting reps in, learning client communication, and building more portfolio pieces. Still worth it at this rate.</p>
+        </div>
+      </div>
+      <div class="pt-item">
+        <div class="pt-marker done"></div>
+        <div class="pt-body">
+          <div class="pt-milestone">Clients 4–6</div>
+          <div class="pt-price-row">
+            <span class="pt-price">$600–800</span>
+            <span class="pt-tier">Growing confidence</span>
+          </div>
+          <p>You've delivered 5+ real projects. Raise to $600 minimum. You now have real testimonials, real portfolio pieces, and real experience to justify this.</p>
+        </div>
+      </div>
+      <div class="pt-item">
+        <div class="pt-marker"></div>
+        <div class="pt-body">
+          <div class="pt-milestone">Clients 7–12</div>
+          <div class="pt-price-row">
+            <span class="pt-price">$900–1,200</span>
+            <span class="pt-tier">Professional rate</span>
+          </div>
+          <p>By now you have a proven track record. Raise to $1,000 for a standard 5-page site. If clients push back, show your portfolio and let the work speak. Some will say no — that's okay. The ones who say yes subsidize the ones who don't.</p>
+        </div>
+      </div>
+      <div class="pt-item">
+        <div class="pt-marker"></div>
+        <div class="pt-body">
+          <div class="pt-milestone">Month 6+</div>
+          <div class="pt-price-row">
+            <span class="pt-price">$1,500+</span>
+            <span class="pt-tier">Agency territory</span>
+          </div>
+          <p>At this point you have testimonials, a strong portfolio, referrals, and systems. You're operating better than most adult freelancers. Premium pricing is completely justified — and some clients prefer paying more because it signals professionalism.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERRAL ENGINE -->
+  <div class="section">
+    <div class="eyebrow">Step 4 of 5 — Referrals</div>
+    <h2>Build Your Referral Engine</h2>
+    <p class="sub">After Phase 3, referrals should become your #1 source of clients. Referred clients trust you before they meet you, close faster, and pay more without negotiating.</p>
+
+    <div class="referral-flow" style="margin-bottom:24px;">
+      <div class="rf-step">
+        <div class="rf-num">01</div>
+        <h4>Deliver outstanding work</h4>
+        <p>Over-communicate. Deliver on time. Show the client something beautiful.</p>
+      </div>
+      <div class="rf-step">
+        <div class="rf-num">02</div>
+        <h4>Ask for a testimonial</h4>
+        <p>"Would you mind writing 2–3 sentences about your experience? I'd love to share it on my site."</p>
+      </div>
+      <div class="rf-step">
+        <div class="rf-num">03</div>
+        <h4>Ask for referrals directly</h4>
+        <p>"Do you know 2–3 other business owners who might need a site? I'd offer you $75 for any intro that becomes a client."</p>
+      </div>
+      <div class="rf-step">
+        <div class="rf-num">04</div>
+        <h4>Pay the referral reward</h4>
+        <p>When they send a client who pays, send $75 immediately. Word spreads fast when people get paid for referrals.</p>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="cl-label">✓ The referral math</div>
+      <p>If each client refers just 1 new client, your client base doubles with every project cycle. 5 clients become 10. 10 become 20. You pay $75 per referral and earn $800–1,500+ per project. That's a 10–20x return on referral spend.</p>
+    </div>
+  </div>
+
+  <!-- SOCIAL & CONTENT -->
+  <div class="section">
+    <div class="eyebrow">Step 4.5 of 5 — Social Proof</div>
+    <h2>Document & Post Your Work</h2>
+    <p class="sub">Social media compounds over time. One post about "I rebuilt this barbershop's website at 15" can get thousands of views and generate inbound leads for months.</p>
+
+    <div class="content-cards" style="margin-bottom:24px;">
+      <div class="cc-card">
+        <div class="cc-header">
+          <span class="cc-platform">TikTok / Reels</span>
+          <span class="cc-freq">1–2x/week</span>
+        </div>
+        <div class="cc-body">
+          <h4>Content ideas</h4>
+          <ul>
+            <li>"I built this restaurant a website for $800" (before/after)</li>
+            <li>"How I got my first client at 15"</li>
+            <li>"Day in my life as a 15-year-old freelancer"</li>
+            <li>"Watch me build a website in 30 minutes" (timelapse)</li>
+            <li>"How much I made this week"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cc-card">
+        <div class="cc-header">
+          <span class="cc-platform">Instagram</span>
+          <span class="cc-freq">2–3x/week</span>
+        </div>
+        <div class="cc-body">
+          <h4>Content ideas</h4>
+          <ul>
+            <li>Before/after screenshots of client sites</li>
+            <li>Screenshot of a client text saying "love it!"</li>
+            <li>Your desk/workspace setup</li>
+            <li>Carousel: "5 signs a local business needs a new website"</li>
+            <li>Milestone posts: "Just hit $1k in sales at 15"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cc-card">
+        <div class="cc-header">
+          <span class="cc-platform">LinkedIn</span>
+          <span class="cc-freq">1x/week</span>
+        </div>
+        <div class="cc-body">
+          <h4>Content ideas</h4>
+          <ul>
+            <li>Written posts: "What I've learned from my first 5 freelance clients"</li>
+            <li>Case study: "How I helped [type] increase bookings with a new site"</li>
+            <li>Professional introduction post (gets major engagement at 15)</li>
+            <li>Lessons from pricing mistakes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <div class="cl-label">⚠ Always get client permission before posting</div>
+      <p>Before sharing any client work publicly, ask: "Would you mind if I shared your site on my social media as a portfolio example?" Most say yes immediately — it's free marketing for them too. If they say no, respect it and never post their work.</p>
+    </div>
+  </div>
+
+  <!-- INCOME PROJECTION -->
+  <div class="section">
+    <div class="eyebrow">Step 5 of 5 — The Numbers</div>
+    <h2>Realistic Income by Month</h2>
+    <p class="sub">Conservative projections assuming consistent outreach (15 touchpoints/week) and one free portfolio project in Month 1.</p>
+
+    <table class="income-table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Activity</th>
+          <th>Income</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Month 1</td>
+          <td>1 free/cheap site + 1 paid starter</td>
+          <td>$400</td>
+          <td>Learning phase. Focus on quality, not volume. Get that first testimonial.</td>
+        </tr>
+        <tr>
+          <td>Month 2</td>
+          <td>2 paid sites + 2 retainer clients</td>
+          <td>$1,300</td>
+          <td>$1,000 from projects + $300 retainer. First recurring income hits.</td>
+        </tr>
+        <tr>
+          <td>Month 3</td>
+          <td>2–3 sites + 4 retainers + upsells</td>
+          <td>$2,400</td>
+          <td>Referrals start coming in. Raise prices to $700+. Upsells add ~$300.</td>
+        </tr>
+        <tr>
+          <td>Month 4</td>
+          <td>3 sites + 6 retainers + upsells</td>
+          <td>$3,300</td>
+          <td>$2,400 from projects + $900 retainer. Systems save you 5+ hrs/week.</td>
+        </tr>
+        <tr>
+          <td>Month 5</td>
+          <td>3 sites + 8 retainers + upsells</td>
+          <td>$4,000</td>
+          <td>Raise prices to $1,000 per site. Social content starts generating inbound.</td>
+        </tr>
+        <tr>
+          <td>Month 6</td>
+          <td>3–4 sites + 10 retainers + upsells</td>
+          <td>$5,000+</td>
+          <td>$3,000+ from projects + $1,500 retainer + $500 upsells. Full business mode.</td>
+        </tr>
+        <tr class="total-row">
+          <td>6-mo total</td>
+          <td>~15 sites built, ~10 retainer clients</td>
+          <td>~$16,400</td>
+          <td>All earned while in school, ~10 hrs/week from Month 3 onwards.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout blue" style="margin-top:24px;">
+      <div class="cl-label">📌 These are conservative numbers</div>
+      <ul>
+        <li>They assume consistent outreach — stop outreaching and the pipeline dries up</li>
+        <li>They assume 1 in 10 contacts converts — you may do better with walk-ins</li>
+        <li>Retainer clients are cumulative — they add up every month</li>
+        <li>A single viral TikTok post could double Month 3 income overnight</li>
+        <li>These numbers don't account for referral compounding, which accelerates significantly in months 4–6</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">Phase 4 Complete When...</div>
+    <h2>Your Phase 4 Completion Checklist</h2>
+    <ul class="checklist" style="margin-top:24px;">
+      <li><div class="check-box"></div> I have a Notion or spreadsheet client pipeline I check every week</li>
+      <li><div class="check-box"></div> I have at least 2 reusable site templates built in my platform</li>
+      <li><div class="check-box"></div> I have an onboarding questionnaire (Google Form) I send every new client</li>
+      <li><div class="check-box"></div> I have offered a retainer to every completed client</li>
+      <li><div class="check-box"></div> I have offered at least one upsell service to each client after delivery</li>
+      <li><div class="check-box"></div> I have asked every completed client for a referral (and offered $75 commission)</li>
+      <li><div class="check-box"></div> I have raised my prices at least once from my starting rate</li>
+      <li><div class="check-box"></div> I am posting at least 1x/week on one social media platform about my work</li>
+      <li><div class="check-box"></div> I am still doing outreach (15+ touchpoints/week) even when busy with projects</li>
+      <li><div class="check-box"></div> My monthly recurring retainer income is at least $500/mo</li>
+    </ul>
+  </div>
+
+  <div class="final-block">
+    <h2>You're 6 months from<br><em>a real business.</em></h2>
+    <p>Most adults never build a business. You have every tool, script, and system here to make $4,000+ a month at 15 — while in school — with zero startup cost. The only thing between you and that income is execution.</p>
+    <div class="final-stats">
+      <div class="final-stat">
+        <span class="fs-num">$0</span>
+        <span class="fs-label">Startup cost</span>
+      </div>
+      <div class="final-stat">
+        <span class="fs-num">Week 1</span>
+        <span class="fs-label">Start date</span>
+      </div>
+      <div class="final-stat">
+        <span class="fs-num">$5K</span>
+        <span class="fs-label">Month 6 potential</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>Phase 04 — Scale & Systems</span>
+  <span>All 4 phases complete. Start Phase 01 today.</span>
+</footer>
+
+</body>
+</html>

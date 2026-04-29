@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 1 — Skills & Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --surface: #ffffff;
+    --ink: #1a1714;
+    --mid: #5a5550;
+    --faint: #e8e3db;
+    --rule: #d4cdc4;
+    --accent: #c0392b;
+    --accent-bg: #fdf0ee;
+    --accent2: #2c5f2e;
+    --accent2-bg: #eef4ee;
+    --gold: #b8860b;
+    --gold-bg: #fdf8ec;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 64px 60px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '01';
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 220px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .phase-tag {
+    font-family: 'Syne Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c0a882;
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(44px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #faf7f2;
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: #e8c97a;
+  }
+
+  .header-desc {
+    font-size: 15px;
+    color: #9a9086;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6a6058;
+  }
+
+  .meta-val {
+    font-size: 16px;
+    font-weight: 600;
+    color: #faf7f2;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 60px 100px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--mid);
+    margin-bottom: 32px;
+    max-width: 560px;
+  }
+
+  /* ── TOOL CARDS ── */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .tool-card {
+    background: var(--surface);
+    padding: 28px;
+  }
+
+  .tool-card .tool-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .tool-card .tool-type {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .tool-card p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  .tool-card .verdict {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: var(--accent-bg);
+    border-left: 2px solid var(--accent);
+    font-size: 12px;
+    color: var(--accent);
+    border-radius: 2px;
+  }
+
+  .tool-card .verdict.green {
+    background: var(--accent2-bg);
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  /* ── STEP LIST ── */
+  .step-block {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .step-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .step-item:last-child { border-bottom: none; }
+
+  .step-num {
+    background: var(--faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    color: var(--rule);
+    border-right: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    padding: 20px 24px;
+  }
+
+  .step-content h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  .step-content .step-time {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    background: var(--gold-bg);
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 24px 0;
+  }
+
+  .callout.red {
+    background: var(--accent-bg);
+    border: 1px solid #f0c4be;
+  }
+
+  .callout.green {
+    background: var(--accent2-bg);
+    border: 1px solid #c4dbc4;
+  }
+
+  .callout.gold {
+    background: var(--gold-bg);
+    border: 1px solid #e8d4a0;
+  }
+
+  .callout-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .callout.red .callout-label { color: var(--accent); }
+  .callout.green .callout-label { color: var(--accent2); }
+  .callout.gold .callout-label { color: var(--gold); }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout ul {
+    list-style: none;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .callout ul li {
+    font-size: 13px;
+    color: var(--mid);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .callout ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-size: 12px;
+  }
+
+  /* ── PORTFOLIO SPEC ── */
+  .portfolio-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .portfolio-card {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .portfolio-card .pc-header {
+    background: var(--ink);
+    padding: 16px 18px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--bg);
+  }
+
+  .portfolio-card .pc-body {
+    padding: 16px 18px;
+  }
+
+  .portfolio-card .pc-type {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .portfolio-card .pc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .portfolio-card .pc-list li {
+    font-size: 12px;
+    color: var(--mid);
+    display: flex;
+    gap: 8px;
+  }
+
+  .portfolio-card .pc-list li::before {
+    content: '✓';
+    color: var(--accent2);
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 24px;
+    bottom: 24px;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 24px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-dot {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Syne Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    z-index: 1;
+  }
+
+  .tl-dot.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .tl-body {
+    padding-top: 6px;
+    padding-bottom: 8px;
+  }
+
+  .tl-body h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .tl-body p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .tl-body .tl-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    background: var(--faint);
+    color: var(--mid);
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+  }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0;
+  }
+
+  footer {
+    background: var(--ink);
+    color: #6a6058;
+    padding: 32px 60px;
+    font-family: 'Syne Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer span { color: #c0a882; }
+
+  @media (max-width: 640px) {
+    header, main { padding-left: 24px; padding-right: 24px; }
+    .tool-grid { grid-template-columns: 1fr; }
+    .portfolio-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="phase-tag">Phase 01 of 04 · Weeks 1–2 · Foundation</div>
+  <h1>Build Your <em>Skills</em><br>& Portfolio</h1>
+  <p class="header-desc">Before you talk to a single client, you need two things: the ability to build something real, and proof that you already have. This phase gives you both in two weeks.</p>
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Duration</span>
+      <span class="meta-val">2 Weeks</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Time/week</span>
+      <span class="meta-val">~15 hrs</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cost</span>
+      <span class="meta-val">$0–14</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Phase goal</span>
+      <span class="meta-val">3 portfolio pieces + live personal site</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SECTION: CHOOSE YOUR TOOL -->
+  <div class="section">
+    <div class="section-eyebrow">Step 1 of 5</div>
+    <h2>Choose Your Building Tool</h2>
+    <p class="section-sub">You don't need to code from scratch. Pick one platform and master it completely — don't split your attention.</p>
+
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-type">Recommended for beginners</div>
+        <div class="tool-name">Webflow</div>
+        <p>Visual drag-and-drop builder with real HTML/CSS output. Steep learning curve for the first 3 days, then clicks fast. Has a free plan. Clients get a professional CMS. The industry standard for freelancers.</p>
+        <div class="verdict green">✓ Best for long-term — most hireable skill too</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-type">Fastest results</div>
+        <div class="tool-name">Framer</div>
+        <p>More modern, better animations out of the box, slightly easier to learn. Slightly less flexible for complex layouts. Free plan available. Growing fast in popularity — great portfolio aesthetic.</p>
+        <div class="verdict green">✓ Pick this if you want results in 3 days, not 7</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-type">Easiest, but limited</div>
+        <div class="tool-name">Squarespace / Wix</div>
+        <p>Fastest to learn, hardest to customize. Sites look templated. Harder to justify a premium price. Fine to start, but upgrade to Webflow or Framer as soon as possible.</p>
+        <div class="verdict">⚠ Only if you want first client in days, not weeks</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-type">For the ambitious</div>
+        <div class="tool-name">HTML + CSS + JS</div>
+        <p>Takes 1–3 months to get good enough to show clients. Not recommended for Phase 1. Learn it alongside your tool if interested, but don't delay client work to "learn to code first."</p>
+        <div class="verdict">⚠ Do this after your first $1,000 — not before</div>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <div class="callout-label">📺 Where to learn (free)</div>
+      <p>For Webflow: search "Webflow University" on YouTube — official channel, totally free, covers everything. For Framer: "Framer Academy" YouTube. Commit to 2–3 hours of tutorials on Day 1 before touching anything else.</p>
+    </div>
+  </div>
+
+  <!-- SECTION: LEARN FIGMA -->
+  <div class="section">
+    <div class="section-eyebrow">Step 2 of 5</div>
+    <h2>Learn Figma for Client Mockups</h2>
+    <p class="section-sub">Figma is how you show clients what their site will look like before you build it. This alone makes you look 10x more professional.</p>
+
+    <div class="step-block">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Create a free Figma account</h4>
+          <p>Go to figma.com — the free plan is all you need. Download the desktop app for better performance. Don't pay for anything yet.</p>
+          <span class="step-time">15 minutes</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Watch "Figma for Beginners" on YouTube</h4>
+          <p>Search "Figma for beginners web design 2024" — pick any video over 45 minutes. You need to learn: frames, auto layout, components, and how to share a prototype link. These 4 things are all you need.</p>
+          <span class="step-time">2–3 hours</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Clone a free Figma website template</h4>
+          <p>Search "free Figma website template" in the Figma Community. Clone one, take it apart, and study how it's structured. This is faster than building from scratch as a beginner.</p>
+          <span class="step-time">1 hour</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Build one mockup from scratch</h4>
+          <p>Design a homepage for a fake local business (e.g., "Mike's Barbershop"). Include: hero section, services, about, contact. This becomes portfolio piece #1 even before you build the real site.</p>
+          <span class="step-time">3–4 hours</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-label">💡 Why this matters</div>
+      <p>When you meet a client, you can say: "I'll show you exactly what your site will look like before I build a single page." This closes deals. Clients hate surprises — Figma mockups eliminate them. It also protects you from doing full rebuilds because the client "didn't picture it that way."</p>
+    </div>
+  </div>
+
+  <!-- SECTION: BUILD PORTFOLIO SITES -->
+  <div class="section">
+    <div class="section-eyebrow">Step 3 of 5</div>
+    <h2>Build 3 Portfolio Sites</h2>
+    <p class="section-sub">You need proof of your work before you have real clients. Build fictional but realistic sites for three different local business types.</p>
+
+    <div class="portfolio-cards">
+      <div class="portfolio-card">
+        <div class="pc-header">Site #1</div>
+        <div class="pc-body">
+          <div class="pc-type">Suggested: Barbershop / Hair Salon</div>
+          <ul class="pc-list">
+            <li>Hero with big photo + "Book Now" button</li>
+            <li>Services + pricing section</li>
+            <li>Gallery of 6 haircut photos (from Unsplash)</li>
+            <li>Hours + location + Google Map embed</li>
+            <li>Contact form</li>
+            <li>Mobile responsive — test on your phone</li>
+          </ul>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-header">Site #2</div>
+        <div class="pc-body">
+          <div class="pc-type">Suggested: Restaurant / Café</div>
+          <ul class="pc-list">
+            <li>Full-bleed food photography hero</li>
+            <li>Menu section (PDF link or inline)</li>
+            <li>About the owner / story section</li>
+            <li>Reservation / contact form</li>
+            <li>Instagram feed embed (or fake grid)</li>
+            <li>Hours + location + parking info</li>
+          </ul>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-header">Site #3</div>
+        <div class="pc-body">
+          <div class="pc-type">Suggested: Contractor / Plumber / Cleaner</div>
+          <ul class="pc-list">
+            <li>Trust-first hero: "Licensed & Insured"</li>
+            <li>Services list with icons</li>
+            <li>Before/after project photos</li>
+            <li>3 fake testimonials (star rating style)</li>
+            <li>Call-to-action: "Get a free quote"</li>
+            <li>Contact form + phone number</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      <div class="callout-label">⚠ Important: Label these as "Concept Designs"</div>
+      <p>In your portfolio, write "Concept design — fictional business" in small text below each site. This is honest and legal. Clients won't care — they're looking at the quality of the work, not whether the business is real. Never imply fake clients are real clients.</p>
+    </div>
+
+    <div class="callout gold">
+      <div class="callout-label">🖼 Free photo sources (critical for quality)</div>
+      <p>Your sites look professional when photos look professional. Use these free sources — never use Google Images (copyright issues):</p>
+      <ul>
+        <li>Unsplash.com — best quality, any category</li>
+        <li>Pexels.com — large library, easy search</li>
+        <li>Pixabay.com — more stock-style but free</li>
+        <li>Search "[business type] [food/interior/people]" — be specific</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION: REAL FREE CLIENT -->
+  <div class="section">
+    <div class="section-eyebrow">Step 4 of 5 · Optional but highly recommended</div>
+    <h2>Land One Real (Free or Cheap) Client</h2>
+    <p class="section-sub">One real project outweighs three fictional ones. It's also how you learn what clients actually want.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot active">1</div>
+        <div class="tl-body">
+          <h4>List every adult you know</h4>
+          <p>Parents, relatives, neighbors, parents' friends, coaches, teachers with side businesses. Write them all down. You need 10 names minimum.</p>
+          <span class="tl-tag">Day 1</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot active">2</div>
+        <div class="tl-body">
+          <h4>Ask each one a simple question</h4>
+          <p>"Do you know anyone who owns a small business without a website, or with a really outdated one?" Don't pitch yourself yet — just gather names. You're looking for an introduction, not a sale.</p>
+          <span class="tl-tag">Days 1–3</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot active">3</div>
+        <div class="tl-body">
+          <h4>Offer to do it free or for $100–200</h4>
+          <p>This is a portfolio project, not a money-making project. Frame it that way: "I'm building my portfolio and I'd love to do your website for free / for a small fee. All I ask is a testimonial when it's done." Most small business owners will say yes instantly.</p>
+          <span class="tl-tag">Days 3–5</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-body">
+          <h4>Build it, get their feedback, publish it</h4>
+          <p>Show them the Figma mockup first. Get one round of feedback. Build it. Show them the live site. Get a written testimonial and a screenshot permission. This is now your strongest portfolio piece — a real business, real URL.</p>
+          <span class="tl-tag">Week 2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: YOUR OWN SITE -->
+  <div class="section">
+    <div class="section-eyebrow">Step 5 of 5</div>
+    <h2>Build Your Own Portfolio Website</h2>
+    <p class="section-sub">Your site is your proof of concept. If your own website looks bad, clients won't trust you to build theirs.</p>
+
+    <div class="step-block">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Choose a domain name</h4>
+          <p>Use your real name: firstname-lastname.com or firstnamelastname.com. If your name is hard to spell, use a business name: "BrightSiteStudios.com" or similar. Buy through Namecheap (~$10/yr) or Google Domains.</p>
+          <span class="step-time">Cost: ~$10</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Your site needs exactly these 5 things</h4>
+          <p><strong>1.</strong> Your name + what you do ("I build websites for local businesses")<br>
+          <strong>2.</strong> 3 portfolio pieces with live links or screenshots<br>
+          <strong>3.</strong> A short "About" — including that you're 15 (this is your edge, own it)<br>
+          <strong>4.</strong> A contact form or "Book a call" button (use Calendly free)<br>
+          <strong>5.</strong> 1–2 testimonials once you have them</p>
+          <span class="step-time">3–5 hours to build</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Keep it dead simple</h4>
+          <p>One page is fine. Resist the urge to build an elaborate site for yourself — clients don't hire you because your site has parallax scrolling. They hire you because your portfolio work is good and you seem professional and responsive.</p>
+          <span class="step-time">Less is more</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Test it on mobile before showing anyone</h4>
+          <p>Over 60% of people will view your site on a phone. If it looks broken on mobile, you've lost the client before you even spoke to them. Test on both iOS and Android if possible.</p>
+          <span class="step-time">30 min test + fix session</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- END OF PHASE CHECKLIST -->
+  <div class="section">
+    <div class="section-eyebrow">Phase 1 Complete When...</div>
+    <h2>Your Phase 1 Completion Checklist</h2>
+    <p class="section-sub">Don't move to Phase 2 until every box is checked.</p>
+
+    <ul class="checklist">
+      <li><div class="check-box"></div> I chose one building tool (Webflow, Framer, or Squarespace) and completed the beginner tutorial series</li>
+      <li><div class="check-box"></div> I can use Figma to design a basic 5-section homepage mockup</li>
+      <li><div class="check-box"></div> I have 3 portfolio sites built (fictional is fine) with real photography from Unsplash/Pexels</li>
+      <li><div class="check-box"></div> Each portfolio site is mobile-responsive and tested on a phone</li>
+      <li><div class="check-box"></div> I have (or am in progress on) 1 real client site, even if free</li>
+      <li><div class="check-box"></div> My personal portfolio site is live at a real domain (yourname.com)</li>
+      <li><div class="check-box"></div> My portfolio site has a working contact form or Calendly booking link</li>
+      <li><div class="check-box"></div> I have at least 1 written testimonial (if I did the free client project)</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <span>Phase 01 — Skills & Portfolio</span>
+  <span>Next: Phase 02 — Pricing, Packages & Protection →</span>
+</footer>
+
+</body>
+</html>
